@@ -21,7 +21,7 @@ public class DataSaver {
         String rec;
 
         do
-        {
+        {//loop user input
             System.out.println("Please input data for a data entry.");
             firstName = SafeInput.getNonZeroLenString(scan, "Please input your First Name");
             lastName = SafeInput.getNonZeroLenString(scan, "Please input your Last Name");
@@ -33,9 +33,10 @@ public class DataSaver {
             rec = firstName+","+lastName+","+userIDStr+","+email+","+birthYear;
             System.out.println(rec);
             lines.add(rec);
-        }
+        }//until they decide to stop adding lines
         while (SafeInput.getYNConfirm(scan, "Do you want to make another line?"));
 
+        //make the filename according to the user's nonzero input, save it with the name and in the local folder.
         String fileName = SafeInput.getNonZeroLenString(scan,"Please name your file.");
         System.out.println("Saving your file...");
         File workingDirectory = new File(System.getProperty("user.dir"));
@@ -43,16 +44,17 @@ public class DataSaver {
 
         try
         {
+            //output stream will save to the file, instead of reading from it to save to an arraylist
             OutputStream out = new BufferedOutputStream(Files.newOutputStream(file, CREATE));
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
 
             for(String recs : lines)
-            {
+            {//write all lines from the record to the file
                 writer.write(recs,0,recs.length());
                 writer.newLine();
             }
             writer.close();
-            System.out.println("Saved!");
+            System.out.println("Saved!");//tell the user they saved.
         }
         catch (Exception e)
         {

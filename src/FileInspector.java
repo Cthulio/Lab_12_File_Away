@@ -29,10 +29,10 @@ public class FileInspector {
             {
                 //handle opening file here
                 selectedFile = chooser.getSelectedFile();
-                Path file = selectedFile.toPath();
+                Path file = selectedFile.toPath();//set a file path
 
-                InputStream in = new BufferedInputStream(Files.newInputStream(file, CREATE));
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                InputStream in = new BufferedInputStream(Files.newInputStream(file, CREATE));//create a buffer for our media/text
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));//we need to fill the buffer with something, this will actively do that
                 ArrayList<String> lines = new ArrayList<>();
 
                 int line = 0;
@@ -52,6 +52,7 @@ public class FileInspector {
                 int charCount = 0;
                 String[] characters;
 
+                //counting the lines is done, we need to count words and characters, this can be done one after the other.
                 for(String l:lines) {
                     words = l.split(" ");
                     wordCount += words.length;
